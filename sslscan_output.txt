@@ -1,11 +1,37 @@
-sslscan sifaris.walingmun.gov.np:443
+sslscan sifaris.walingmun.gov.np
 
-Version: 2.0.11
+Version: 2.0.15
+OpenSSL 1.1.1u
 
-Testing protocols: SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2 TLSv1.3
+Testing SSL server sifaris.walingmun.gov.np on port 443
 
-Host: sifaris.walingmun.gov.np (103.69.125.174)
+SSL/TLS Protocols:
+SSLv2      Not supported
+SSLv3      Not supported
+TLSv1.0    Not supported
+TLSv1.1    Not supported
+TLSv1.2    Not supported
+TLSv1.3    Not supported
 
-Failed to establish SSL connection: connection timed out or reset by peer
+SSL Cipher Suites:
+No cipher suites supported or no response from server
 
-No protocols supported or server unreachable.
+Server Certificate:
+  Subject:     sifaris.walingmun.gov.np
+  Issuer:      R10
+  Valid From:  May 22 03:59:27 2025 GMT
+  Valid Until: Aug 20 03:59:26 2025 GMT
+  Serial:      05b87f1e3f0b44ffe14ba6418983217940ea
+  Algorithm:   SHA256withRSA
+  Key Size:    2048 bits
+  Version:     1 (Invalid - extensions present, should be v3)
+
+Failed to complete SSL handshake:
+  - Server may not be accepting connections
+  - Firewall, IDS/IPS, or rate limiting may be blocking the scan
+  - No compatible TLS protocols negotiated
+
+Conclusion:
+  SSL handshake failed
+  No supported SSL/TLS protocols or cipher suites detected
+  Certificate appears malformed (v1 with extensions)
