@@ -1,37 +1,97 @@
-sslscan sifaris.walingmun.gov.np
+# SSL Server Test Report
+**Target Domain:** sifaris.walingmun.gov.np  
+**IP Address:** 103.69.125.174  
+**Assessment Time:** Sunday, 25 May 2025, 07:35 UTC  
+**Tool Used:** SSL Labs SSL Server Test & Nmap (`ssl-enum-ciphers` script)
 
-Version: 2.0.15
-OpenSSL 1.1.1u
+---
 
-Testing SSL server sifaris.walingmun.gov.np on port 443
+## Summary
 
-SSL/TLS Protocols:
-SSLv2      Not supported
-SSLv3      Not supported
-TLSv1.0    Not supported
-TLSv1.1    Not supported
-TLSv1.2    Not supported
-TLSv1.3    Not supported
+- **Port 443 (HTTPS):** Open
+- **SSL Labs Result:** Assessment Failed – Unable to connect to the server.
+- **Nmap Result:** TLS/SSL protocols and ciphers detected
 
-SSL Cipher Suites:
-No cipher suites supported or no response from server
+---
 
-Server Certificate:
-  Subject:     sifaris.walingmun.gov.np
-  Issuer:      R10
-  Valid From:  May 22 03:59:27 2025 GMT
-  Valid Until: Aug 20 03:59:26 2025 GMT
-  Serial:      05b87f1e3f0b44ffe14ba6418983217940ea
-  Algorithm:   SHA256withRSA
-  Key Size:    2048 bits
-  Version:     1 (Invalid - extensions present, should be v3)
+## SSL Labs Scan – Error Details
 
-Failed to complete SSL handshake:
-  - Server may not be accepting connections
-  - Firewall, IDS/IPS, or rate limiting may be blocking the scan
-  - No compatible TLS protocols negotiated
+The SSL Labs scan could not complete successfully. The following errors were reported:
 
-Conclusion:
-  SSL handshake failed
-  No supported SSL/TLS protocols or cipher suites detected
-  Certificate appears malformed (v1 with extensions)
+### Known Issues:
+- **No secure protocols supported** (possible misconfiguration or blocking).
+- **Certificate uses version 1 with extensions**, which is invalid.
+- **Possible rate limiting** or **firewall restrictions** blocked the scan.
+- **Handshake Failure** – SSL Labs could not complete the connection.
+- **Multiple TLS servers on same IP** may cause test conflicts.
+
+---
+
+## Certificate Chain Details
+
+### Certificate #1 (Leaf Certificate)
+- **Subject CN:** sifaris.walingmun.gov.np  
+- **Alt Names:** sifaris.walingmun.gov.np  
+- **Valid From:** 22 May 2025  
+- **Valid To:** 20 August 2025  
+- **Public Key:** RSA 2048 bits  
+- **Signature Algorithm:** SHA256withRSA  
+- **Issuer:** R10  
+- **Revocation Status:** Good  
+- **CRL URL:** http://r10.c.lencr.org/107.crl  
+- **Trusted Platforms:** Mozilla, Apple, Android, Java, Windows  
+- **Extended Validation (EV):** No
+
+### Certificate #2 (Intermediate)
+- **Subject:** R10  
+- **Issuer:** ISRG Root X1  
+- **Public Key:** RSA 2048 bits  
+- **Valid To:** 12 March 2027  
+- **Signature Algorithm:** SHA256withRSA
+
+---
+
+## Certification Path (Trusted)
+
+| Level | Issuer / Subject          | Fingerprint (SHA256)                                               |
+|-------|---------------------------|--------------------------------------------------------------------|
+| 1     | sifaris.walingmun.gov.np  | `08ce477e13584943ae795bb7d510d14992e4df38d1a1290051ab2c6569290bff` |
+| 2     | R10                       | `9d7c3f1aa6ad2b2ec0d5cf1e246f8d9ae6cbc9fd0755ad37bb974b1f2fb603f3` |
+| 3     | ISRG Root X1 (Self-Signed)| `96bcec06264976f37460779acf28c5a7cfe8a3c0aae11a8ffcee05c0bddf08c6` |
+
+---
+
+## Nmap TLS Cipher Scan Results
+
+### TLSv1.1
+- `TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA` - A
+- `TLS_RSA_WITH_3DES_EDE_CBC_SHA` - **C (Weak, SWEET32)**
+- `TLS_RSA_WITH_AES_256_CBC_SHA` - A
+
+### TLSv1.2
+- Strong cipher suites present (GCM, CBC)
+- **3DES** still supported – should be removed
+
+### TLSv1.3
+- `TLS_AKE_WITH_AES_128_GCM_SHA256` - A
+- `TLS_AKE_WITH_AES_256_GCM_SHA384` - A
+
+---
+
+## Observations & Recommendations
+
+### Issues Detected:
+- Use of deprecated TLSv1.1 (should be disabled)
+- Presence of **3DES cipher** vulnerable to SWEET32
+- SSL Labs scan failed (possible blocking, misconfiguration, or handshake issue)
+
+### Recommendations:
+- Disable TLSv1.0 and TLSv1.1
+- Remove weak ciphers (e.g., 3DES)
+- Review server firewall and IDS policies to allow external scanners like SSL Labs
+- Consider re-issuing the certificate with correct version formatting
+- Monitor expiration date – renew before 20 August 2025
+
+---
+
+### End of Report
