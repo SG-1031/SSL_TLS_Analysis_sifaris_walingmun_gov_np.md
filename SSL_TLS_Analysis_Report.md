@@ -1,5 +1,3 @@
----
-
 # SSL/TLS Analysis Report
 
 **Target:** sifaris.walingmun.gov.np (IP: 103.69.125.174)
