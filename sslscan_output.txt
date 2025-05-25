@@ -1,0 +1,11 @@
+sslscan sifaris.walingmun.gov.np:443
+
+Version: 2.0.11
+
+Testing protocols: SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2 TLSv1.3
+
+Host: sifaris.walingmun.gov.np (103.69.125.174)
+
+Failed to establish SSL connection: connection timed out or reset by peer
+
+No protocols supported or server unreachable.
