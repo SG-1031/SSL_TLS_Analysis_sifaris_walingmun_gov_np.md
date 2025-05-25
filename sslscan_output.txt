@@ -1,97 +1,82 @@
-# SSL Server Test Report
-**Target Domain:** sifaris.walingmun.gov.np  
-**IP Address:** 103.69.125.174  
-**Assessment Time:** Sunday, 25 May 2025, 07:35 UTC  
-**Tool Used:** SSL Labs SSL Server Test & Nmap (`ssl-enum-ciphers` script)
+SSL Report: sifaris.walingmun.gov.np (103.69.125.174)
+Assessed on:  Sun, 25 May 2025 07:35:06 UTC
 
----
+Assessment failed: Unable to connect to the server
 
-## Summary
+Known Problems
 
-- **Port 443 (HTTPS):** Open
-- **SSL Labs Result:** Assessment Failed – Unable to connect to the server.
-- **Nmap Result:** TLS/SSL protocols and ciphers detected
+There are some errors that we cannot fix properly in the current version. They will be addressed in the next generation version, which is currently being developed.
 
----
+No secure protocols supported - if you get this message, but you know that the site supports SSL, wait until the cache expires on its own, then try again, making sure the hostname you enter uses the "www" prefix (e.g., "www.ssllabs.com", not just "ssllabs.com").
+no more data allowed for version 1 certificate - the certificate is invalid; it is declared as version 1, but uses extensions, which were introduced in version 3. Browsers might ignore this problem, but our parser is strict and refuses to proceed. We'll try to find a different parser to avoid this problem.
+Failed to obtain certificate and Internal Error - errors of this type will often be reported for servers that use connection rate limits or block connections in response to unusual traffic. Problems of this type are very difficult to diagnose. If you have access to the server being tested, before reporting a problem to us, please check that there is no rate limiting or IDS in place.
+NetScaler issues - some NetScaler versions appear to reject SSL handshakes that do not include certain suites or handshakes that use a few suites. If the test is failing and there is a NetScaler load balancer in place, that's most likely the reason.
+Unexpected failure - our tests are designed to fail when unusual results are observed. This usually happens when there are multiple TLS servers behind the same IP address. In such cases we can't provide accurate results, which is why we fail.
 
-## SSL Labs Scan – Error Details
+Common Error Messages
 
-The SSL Labs scan could not complete successfully. The following errors were reported:
+Connect timed out - server did not respond to our connection request, sometimes before we are dynamically blocked when our tests are detected
+No route to host - unable to reach the server
+Unable to connect to server - failed to connect to the server, it usually happens due to firewall restrictions
+Connection reset - we got disconnected from the server
+Unrecognized SSL message, plaintext connection? - the server responded with plain-text HTTP on HTTPS port
+Received fatal alert: handshake_failure - this is either a faulty SSL server or some other server listening on port 443; if the SSL version of the web site works in your browser, please report this issue to us
+Failed to communicate with the secure server - No secure protocol supported. Possibly this server only supports a draft version of TLS 1.3
 
-### Known Issues:
-- **No secure protocols supported** (possible misconfiguration or blocking).
-- **Certificate uses version 1 with extensions**, which is invalid.
-- **Possible rate limiting** or **firewall restrictions** blocked the scan.
-- **Handshake Failure** – SSL Labs could not complete the connection.
-- **Multiple TLS servers on same IP** may cause test conflicts.
+Certificate #1: RSA 2048 bits (SHA256withRSA)
 
----
+Server Key and Certificate #1
+Subject	sifaris.walingmun.gov.np
+Fingerprint SHA256: 08ce477e13584943ae795bb7d510d14992e4df38d1a1290051ab2c6569290bff
+Pin SHA256: KUCXkrLF3XVUFFvhIdxe8HyWIhygeA6h+0Kdo0gVJmE=
+Common names	sifaris.walingmun.gov.np
+Alternative names	sifaris.walingmun.gov.np
+Serial Number	05b87f1e3f0b44ffe14ba6418983217940ea
+Valid from	Thu, 22 May 2025 03:59:27 UTC
+Valid until	Wed, 20 Aug 2025 03:59:26 UTC (expires in 2 months and 25 days)
+Key	RSA 2048 bits (e 65537)
+Weak key (Debian)	No
+Issuer	R10
+AIA: http://r10.i.lencr.org/
+Signature algorithm	SHA256withRSA
+Extended Validation	No
+Revocation information	CRL
+CRL: http://r10.c.lencr.org/107.crl
+Revocation status	Good (not revoked)
+DNS CAA	No (more info)
+Trusted	Yes
+Mozilla  Apple  Android  Java  Windows 
 
-## Certificate Chain Details
+Additional Certificates (if supplied)
+Certificates provided	2 (2587 bytes)
+Chain issues	None
 
-### Certificate #1 (Leaf Certificate)
-- **Subject CN:** sifaris.walingmun.gov.np  
-- **Alt Names:** sifaris.walingmun.gov.np  
-- **Valid From:** 22 May 2025  
-- **Valid To:** 20 August 2025  
-- **Public Key:** RSA 2048 bits  
-- **Signature Algorithm:** SHA256withRSA  
-- **Issuer:** R10  
-- **Revocation Status:** Good  
-- **CRL URL:** http://r10.c.lencr.org/107.crl  
-- **Trusted Platforms:** Mozilla, Apple, Android, Java, Windows  
-- **Extended Validation (EV):** No
+#2
+Subject	R10
+Fingerprint SHA256: 9d7c3f1aa6ad2b2ec0d5cf1e246f8d9ae6cbc9fd0755ad37bb974b1f2fb603f3
+Pin SHA256: K7rZOrXHknnsEhUH8nLL4MZkejquUuIvOIr6tCa0rbo=
+Valid until	Fri, 12 Mar 2027 23:59:59 UTC (expires in 1 year and 9 months)
+Key	RSA 2048 bits (e 65537)
+Issuer	ISRG Root X1
+Signature algorithm	SHA256withRSA
 
-### Certificate #2 (Intermediate)
-- **Subject:** R10  
-- **Issuer:** ISRG Root X1  
-- **Public Key:** RSA 2048 bits  
-- **Valid To:** 12 March 2027  
-- **Signature Algorithm:** SHA256withRSA
+Certification Paths
 
----
+MozillaAppleAndroidJavaWindows
+Path #1: Trusted
+1	Sent by server	sifaris.walingmun.gov.np
+Fingerprint SHA256: 08ce477e13584943ae795bb7d510d14992e4df38d1a1290051ab2c6569290bff
+Pin SHA256: KUCXkrLF3XVUFFvhIdxe8HyWIhygeA6h+0Kdo0gVJmE=
+RSA 2048 bits (e 65537) / SHA256withRSA
 
-## Certification Path (Trusted)
+2	Sent by server	R10
+Fingerprint SHA256: 9d7c3f1aa6ad2b2ec0d5cf1e246f8d9ae6cbc9fd0755ad37bb974b1f2fb603f3
+Pin SHA256: K7rZOrXHknnsEhUH8nLL4MZkejquUuIvOIr6tCa0rbo=
+RSA 2048 bits (e 65537) / SHA256withRSA
 
-| Level | Issuer / Subject          | Fingerprint (SHA256)                                               |
-|-------|---------------------------|--------------------------------------------------------------------|
-| 1     | sifaris.walingmun.gov.np  | `08ce477e13584943ae795bb7d510d14992e4df38d1a1290051ab2c6569290bff` |
-| 2     | R10                       | `9d7c3f1aa6ad2b2ec0d5cf1e246f8d9ae6cbc9fd0755ad37bb974b1f2fb603f3` |
-| 3     | ISRG Root X1 (Self-Signed)| `96bcec06264976f37460779acf28c5a7cfe8a3c0aae11a8ffcee05c0bddf08c6` |
+3	In trust store	ISRG Root X1   Self-signed
+Fingerprint SHA256: 96bcec06264976f37460779acf28c5a7cfe8a3c0aae11a8ffcee05c0bddf08c6
+Pin SHA256: C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M=
+RSA 4096 bits (e 65537) / SHA256withRSA
 
----
-
-## Nmap TLS Cipher Scan Results
-
-### TLSv1.1
-- `TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA` - A
-- `TLS_RSA_WITH_3DES_EDE_CBC_SHA` - **C (Weak, SWEET32)**
-- `TLS_RSA_WITH_AES_256_CBC_SHA` - A
-
-### TLSv1.2
-- Strong cipher suites present (GCM, CBC)
-- **3DES** still supported – should be removed
-
-### TLSv1.3
-- `TLS_AKE_WITH_AES_128_GCM_SHA256` - A
-- `TLS_AKE_WITH_AES_256_GCM_SHA384` - A
-
----
-
-## Observations & Recommendations
-
-### Issues Detected:
-- Use of deprecated TLSv1.1 (should be disabled)
-- Presence of **3DES cipher** vulnerable to SWEET32
-- SSL Labs scan failed (possible blocking, misconfiguration, or handshake issue)
-
-### Recommendations:
-- Disable TLSv1.0 and TLSv1.1
-- Remove weak ciphers (e.g., 3DES)
-- Review server firewall and IDS policies to allow external scanners like SSL Labs
-- Consider re-issuing the certificate with correct version formatting
-- Monitor expiration date – renew before 20 August 2025
-
----
-
-### End of Report
+SSL Report v2.4.0
